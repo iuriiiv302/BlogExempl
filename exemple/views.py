@@ -19,14 +19,15 @@ def article(request, article_id=1):
     args['comments'] = Comments.objects.filter(comments_article_id=article_id)
     args['form'] = comment_form
     args['username'] = auth.get_user(request).username
-    return render_to_response('exemple/article.html', args)
-
 
 def addlike(request, article_id):
     try:
         article = Article.objects.get(id=article_id)  # Проверка существует ли статься
         article.article_likes += 1
         article.save()
+        response = redirect('http://127.0.0.1:8000/articles/all/')
+        response.set_cookie(article_id,"test")
+        return response
     except ObjectDoesNotExist:
         raise Http404
     return redirect('http://127.0.0.1:8000/articles/all/')

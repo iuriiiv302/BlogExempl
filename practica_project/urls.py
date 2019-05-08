@@ -23,6 +23,7 @@ from django.views.generic.base import TemplateView
 from catalog import views
 from catalog.views import likes
 from exemple.views import article,articles, addlike,addcomment
+from loginsys.views import login, logout
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet, base_name='users')
@@ -33,10 +34,11 @@ admin.autodiscover(),
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
+# REST API
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('accounts/', include('django.contrib.auth.urls')),
+#---------------------------------------------------------------
 
 #EXEMPLE
     path('exemple/', articles),
@@ -44,10 +46,16 @@ urlpatterns = [
     path('articles/get/<int:article_id>/', article),
     path('articles/addlike/<int:article_id>/', addlike),
     path('articles/addcomment/<int:article_id>/', addcomment),
-#_____________________________________________________________________
 
-    path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
-    path('like/',likes,name = 'like'),
-    path('', views.allblogs , name='allblogs'),
-    path('<int:blog_id>/', views.detail, name="detail"),
-]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+#-------------------------------------------------------------------
+
+#LIGINSYS
+    path('auth/login/',login),
+    path('auth/logout/',logout),
+#-----------------
+]
+#     path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
+#     path('like/',likes,name = 'like'),
+#     path('', views.allblogs , name='allblogs'),
+#     path('<int:blog_id>/', views.detail, name="detail"),
+# ]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

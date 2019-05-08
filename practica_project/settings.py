@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'catalog',
     'exemple',
+    'loginsys',
 ]
 
 MIDDLEWARE = [
