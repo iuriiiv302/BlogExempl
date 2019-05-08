@@ -22,7 +22,7 @@ from django.conf import settings
 from django.views.generic.base import TemplateView
 from catalog import views
 from catalog.views import likes
-from exemple.views import article,articles
+from exemple.views import article,articles, addlike,addcomment
 
 router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet, base_name='users')
@@ -39,9 +39,11 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
 #EXEMPLE
-    path('articles/all/', articles),
-    path('articles/get/<int:article_id>', article),
     path('exemple/', articles),
+    path('articles/all/', articles),
+    path('articles/get/<int:article_id>/', article),
+    path('articles/addlike/<int:article_id>/', addlike),
+    path('articles/addcomment/<int:article_id>/', addcomment),
 
 #_____________________________________________________________________
 
