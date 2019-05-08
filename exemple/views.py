@@ -5,10 +5,10 @@ from .forms import CommentForm
 from .models import Article, Comments
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
-
+from django.contrib import auth
 
 def articles(request):
-    return render_to_response('exemple/articles.html', {'articles': Article.objects.all()})
+    return render_to_response('exemple/articles.html', {'articles': Article.objects.all(), 'username':auth.get_user(request).username}) # отправлем пользователя из сесии в шаблон
 
 
 def article(request, article_id=1):
@@ -18,6 +18,7 @@ def article(request, article_id=1):
     args['article'] = Article.objects.get(id=article_id)
     args['comments'] = Comments.objects.filter(comments_article_id=article_id)
     args['form'] = comment_form
+    args['username'] = auth.get_user(request).username
     return render_to_response('exemple/article.html', args)
 
 

@@ -6,6 +6,18 @@
     <link rel="stylesheet" type="text/css" href="{% static "static/css/foundation.css" %}">
 </head>
 <body>
+<div class="top-bar">
+    <section class="top-bar-setion">
+        <ul class="left">
+            {% if username %}
+                <li><a href="/auth/logout/">Exit({{ username }})</a></li>
+            {% else %}
+                <li><a href="/auth/login/">Enter</a></li>
+            {% endif %}
+
+        </ul>
+    </section>
+</div>
 <h1><a href="http://127.0.0.1:8000/articles/all/">My blog</a></h1>
 <div class="large-8 column">
 {% block article %}{% endblock %}

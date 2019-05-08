@@ -44,7 +44,6 @@ urlpatterns = [
     path('articles/get/<int:article_id>/', article),
     path('articles/addlike/<int:article_id>/', addlike),
     path('articles/addcomment/<int:article_id>/', addcomment),
-
 #_____________________________________________________________________
 
     path('home/', TemplateView.as_view(template_name='home.html'), name='home'),
